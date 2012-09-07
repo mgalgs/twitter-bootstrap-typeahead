@@ -164,8 +164,10 @@ function ($) {
           var that = this;
 
           items = $(items).map(function (i, item) {
+          		var have_template = false;
           		if (that.options.tmpl) {
           			i = $(that.options.tmpl(item));
+          			have_template = true;
           		} else {
                 i = $(that.options.item);
               }
@@ -177,7 +179,8 @@ function ($) {
               }
 
               console.log(that.options.display)
-              i.find('a').html(that.highlighter(item[that.options.display]));
+              if (!have_template)
+              	  i.find('a').html(that.highlighter(item[that.options.display]));
               return i[0];
           });
 
